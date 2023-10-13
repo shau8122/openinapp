@@ -1,113 +1,95 @@
-import Image from 'next/image'
+"use client";
+import Image from "next/image";
+import discordLogo from "@/public/images/discordLogo.svg";
+import githubLogo from "@/public/images/githubLogo.svg";
+import linkedinLogo from "@/public/images/linkedinLog.svg";
+import twitterLogo from "@/public/images/twitterLogo.svg";
+import googleIcon from "@/public/Icon/googleIcon.svg";
+import appleIcon from "@/public/Icon/appleIcon.svg";
+import AuthForm from "@/components/AuthForm";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-export default function Home() {
+const Home = () => {
+  const { data: session } = useSession();
+  const router = useRouter();
+  useEffect(() => {
+    if (session) {
+      router.push("/dashboard");
+    }
+  }, [session, router]);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <main className="h-screen w-screen relative overflow-hidden bg-[#F8FAFF] ">
+      <div className="bg-gradient-blue w-1/2 h-full absolute top-0 left-0 transform -translate-x-20 -skew-x-6"></div>
+      <div className="text-white absolute font-poppins text-xl font-bold leading-relaxed tracking-wide ml-20 mt-20">
+        LOGO
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
+      <div className="text-white absolute left-1/4 transform -translate-x-[75%] -translate-y-[50%] top-1/2 font-montserrat text-7xl font-bold leading-normal">
+        Board.
+        {/* <SlantedComponent/> */}
+      </div>
+      <div className="absolute bottom-10 left-[10%] w-[20%] flex items-center justify-between">
+        <Image className="cursor-pointer " src={githubLogo} alt="githubLogo" />
+        <Image className="cursor-pointer " src={twitterLogo} alt="githubLogo" />
+        <Image className="cursor-pointer " src={discordLogo} alt="githubLogo" />
         <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+          className="cursor-pointer "
+          src={linkedinLogo}
+          alt="githubLogo"
         />
       </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
+      <div className="w-1/2 h-full flex justify-center items-center absolute top-0 right-0 text-black">
+        <div className="w-[450px] h-3/4 flex flex-col justify-center  p-10 ">
+          <h1 className=" text-4xl font-bold font-montserrat">Sign in</h1>
+          <p className=" font-lato text-base font-normal leading-normal">
+            sign in to your account
           </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+          <div className="flex justify-between items-center w-full gap-2 mt-4">
+            <div className="flex justify-center items-center bg-white py-1 px-4 gap-2 rounded-md ">
+              <Image src={googleIcon} alt="google Icon" />
+              <button
+                onClick={() => signIn("google")}
+                className="text-secondary text-center font-montserrat text-xs font-normal leading-normal"
+              >
+                Sign in with Google
+              </button>
+            </div>
+            <div className="flex justify-center gap-2 py-1 px-4 bg-white items-center rounded-md ">
+              <Image src={appleIcon} alt="apple Icon" />
+              <p className="text-secondary text-center font-montserrat text-xs font-normal leading-normal">
+                Sign in with Apple
+              </p>
+            </div>
+          </div>
+          <div className="mt-4 w-full">
+            <AuthForm />
+            <div
+              className="
+            flex
+            gap-2
+            justify-center
+            text-sm
+            mt-4
+            px-2
+            text-gray-500
+        "
+            >
+              <div className="text-secondary text-center font-lato ">
+                Don&apos;t have an account?
+              </div>
+              <button
+                className=" text-blue-500 cursor-pointer
+          "
+              >
+                Register here
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
-  )
-}
+  );
+};
+export default Home;

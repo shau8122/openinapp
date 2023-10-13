@@ -1,8 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
+.slanted-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 90%);
+}
+
+
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -24,4 +38,4 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-}
+} */
