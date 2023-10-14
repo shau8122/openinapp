@@ -17,6 +17,7 @@ import { useState } from "react";
 import ChartComponent from "@/components/ChartComponent";
 import DonutChartComponent from "@/components/DonutChartComponent";
 import { useSession } from "next-auth/react";
+import Sidebar from "@/components/Sidebar/Sidebar";
 
 const cardDetails = [
   {
@@ -52,6 +53,7 @@ const cardDetails = [
 const Dashboard = () => {
   const {data:session}=useSession();
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [profileData, setProfileData] = useState<any>({});
   console.log(profileData);
   const handleClick = () => {
@@ -64,12 +66,22 @@ const Dashboard = () => {
         handleClick={handleClick}
         setProfileData={setProfileData}
       />
-      
-      <div className="text-black px-10 py-5 flex flex-col flex-1 overflow-y-auto">
-        <div className="flex justify-between">
-          <h1 className="font-bold font-montserrat text-2xl ">Dashboard</h1>
-          <div className="flex gap-5">
-            <div className="bg-white rounded-lg flex justify-between items-center w-[200px] px-5 py-2">
+      {
+        isOpenMenu && (
+          <div className="block relative md:hidden">
+            <div className="absolute">
+
+            <Sidebar setIsOpenMenu={setIsOpenMenu} isOpenMenu={isOpenMenu} />
+            </div>
+          </div>
+        )
+      }
+      <div className="text-black sm:px-1 md:px-10 py-5 flex flex-col flex-1 overflow-y-auto ">
+        <div className="flex justify-between ">
+          <h1 className="font-bold font-montserrat sm:text-xl md:text-2xl text-center ">Dashboard </h1>
+          <div className="md:hidden" onClick={()=>setIsOpenMenu(true)}>Menu</div>
+          <div className="flex md:gap-5">
+            <div className="bg-white rounded-lg flex justify-between items-center sm:w-[100px] md:w-[200px] px-5 py-2">
               <input
                 className="text-gray-400 font-lato text-sm bg-transparent border-0 outline-none flex-grow"
                 placeholder="Search..."
@@ -88,16 +100,18 @@ const Dashboard = () => {
           </div>
         </div>
         <div>
-          <div className="grid grid-cols-4 gap-4 justify-between items-center  mt-5 ">
+          <div className="max-w-screen-2xl overflow-auto">
+
+          <div className="flex sm:justify-start md:justify-between gap-4 md:items-center  mt-5 overflow-auto">
             {cardDetails.map((item) => (
               <div
                 key={item.title}
-                className="flex justify-center bg-white items-start flex-col shadow-lg p-4 rounded-2xl "
+                className="flex  justify-center bg-white items-start flex-col shadow-lg p-4 mb-4 rounded-2xl "
               >
-                <div className={`${item.colorClass} p-2 rounded-full`}>
+                <div className={`${item.colorClass}  p-2 rounded-full`}>
                   <Image src={item.icon} alt="total revenues" />
                 </div>
-                <p className="text-lato text-[11px] text-black mt-3">
+                <p className="w-[200px] text-lato text-[11px] text-black mt-3">
                   {item.title}
                 </p>
                 <div className="flex w-full justify-between items-center gap-2">
@@ -111,15 +125,16 @@ const Dashboard = () => {
               </div>
             ))}
           </div>
+          </div>
           <div className=" w-full mt-5 h-[400px]  m-auto p-4 border rounded-xl shadow-lg bg-white ">
             <ChartComponent />
           </div>
-          <div className="w-full flex h-[250px] mt-5 gap-4">
-            <div className="w-1/2 bg-white rounded-2xl shadow-xl p-5">
+          <div className="w-full  flex flex-col md:flex-row  mt-5 gap-4">
+            <div className="w-full h-[250px] md:w-1/2 bg-white rounded-2xl shadow-xl p-5">
               
               <DonutChartComponent />
             </div>
-            <div className="w-1/2 flex justify-center items-center bg-white shadow-lg rounded-xl">
+            <div className="w-full flex h-[250px] md:w-1/2 justify-center items-center bg-white shadow-lg rounded-xl">
               {!profileData.name ? (
                 <div className="  w-[50px] h-[50px] bg-light-goku rounded-full">
                   <Image
@@ -131,14 +146,14 @@ const Dashboard = () => {
                 </div>
               ) : (
                 <>
-                  <div className="p-10 relative">
+                  <div className="md:p-10 p-4 relative">
                     <h1 className="   font-semibold font-figtree text-2xl text-black">
                       {profileData.name}
                     </h1>
-                    <div className="flex flex-col mr-5">
+                    <div className="flex flex-col md:mr-5">
 
-                    <div className="flex justify-between mt-5 ">
-                      <button className="flex  items-center justify-center gap-3">
+                    <div className="flex md:flex-row flex-col justify-between mt-5 ">
+                      <button className="flex  items-center justify-start md:justify-center gap-3">
                         <div className={`bg-[#E9F9EB] p-3 rounded-full`}>
                           <Image src={whatsappIcon} alt="whatsappIcon" />
                         </div>
@@ -146,7 +161,7 @@ const Dashboard = () => {
                           +91 {profileData?.phone || ""}
                         </p>
                       </button>
-                      <button className="flex  items-center justify-center gap-3">
+                      <button className="flex  items-center justify-start md:justify-center gap-3">
                         <div className={`bg-[#FFE9EC] p-2 rounded-full`}>
                           <Image src={instagramIcon} alt="instagramIcon" />
                         </div>
@@ -156,7 +171,7 @@ const Dashboard = () => {
                       </button>
                       
                     </div>
-                    <div className="flex justify-between mt-5 ">
+                    <div className="flex md:flex-row flex-col justify-between mt-5 ">
                       <button className="flex  items-center  gap-3">
                         <div className={`bg-[#EBE6F9] p-2 rounded-full`}>
                           <Image src={mailIcon} alt="mailIcon" />

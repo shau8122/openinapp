@@ -22,15 +22,35 @@ const Home = () => {
 
   return (
     <main className="h-screen w-screen relative overflow-hidden bg-[#F8FAFF] ">
-      <div className="bg-gradient-blue w-1/2 h-full absolute top-0 left-0 transform -translate-x-20 -skew-x-6"></div>
-      <div className="text-white absolute font-poppins text-xl font-bold leading-relaxed tracking-wide ml-20 mt-20">
+      <div className="bg-gradient-blue w-full h-1/2  md:w-1/2 md:h-full md:absolute md:top-0 md:left-0 md:transform md:-translate-x-20 md:-skew-x-6">
+        <div className="block md:hidden ">
+          <div className="w-full h-1/4 flex justify-center items-center text-white font-poppins text-xl font-bold leading-relaxed tracking-wide pt-20">
+            LOGO
+          </div>
+          <div className="text-white text-center flex justify-center items-center h-1/2 font-montserrat text-7xl font-bold leading-normal mt-20">
+            Board.
+          </div>
+          <div className=" flex items-center justify-around mt-28">
+            <Image className="cursor-pointer " src={githubLogo} alt="githubLogo" />
+            <Image className="cursor-pointer " src={twitterLogo} alt="githubLogo" />
+            <Image className="cursor-pointer " src={discordLogo} alt="githubLogo" />
+            <Image
+              className="cursor-pointer "
+              src={linkedinLogo}
+              alt="githubLogo"
+            />
+          </div>
+        </div>
+      </div>
+    <div className="hidden md:block">
+    <div className="text-white absolute font-poppins text-xl font-bold leading-relaxed tracking-wide ml-20 mt-20">
         LOGO
       </div>
       <div className="text-white absolute left-1/4 transform -translate-x-[75%] -translate-y-[50%] top-1/2 font-montserrat text-7xl font-bold leading-normal">
         Board.
         {/* <SlantedComponent/> */}
       </div>
-      <div className="absolute bottom-10 left-[10%] w-[20%] flex items-center justify-between">
+      <div className=" absolute bottom-10 left-[10%] w-[20%] flex items-center justify-between">
         <Image className="cursor-pointer " src={githubLogo} alt="githubLogo" />
         <Image className="cursor-pointer " src={twitterLogo} alt="githubLogo" />
         <Image className="cursor-pointer " src={discordLogo} alt="githubLogo" />
@@ -40,7 +60,9 @@ const Home = () => {
           alt="githubLogo"
         />
       </div>
-      <div className="w-1/2 h-full flex justify-center items-center absolute top-0 right-0 text-black">
+    </div>
+    <div className="">
+      <div className="md:w-1/2 w-full md:h-full h-1/2 flex justify-center items-center md:absolute top-0 right-0 text-black">
         <div className="w-[450px] h-3/4 flex flex-col justify-center  p-10 ">
           <h1 className=" text-4xl font-bold font-montserrat">Sign in</h1>
           <p className=" font-lato text-base font-normal leading-normal">
@@ -89,6 +111,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+    </div>
     </main>
   );
 };

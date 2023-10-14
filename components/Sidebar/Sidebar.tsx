@@ -3,11 +3,17 @@ import useRoutes from '../../hooks/route'
 import SidebarItem from './SidebarItem';
 import homeIcon from '@/public/images/discordLogo.svg'
 
-
-const Sidebar = () => {
+interface SidebarProps {
+  isOpenMenu?:boolean,
+  setIsOpenMenu?:any
+}
+const Sidebar:React.FC<SidebarProps> = ({
+  isOpenMenu,
+  setIsOpenMenu
+}) => {
   const routes = useRoutes();
   return (
-    <div className="p-10 relative bg-gradient-blue rounded-xl h-[92vh]  w-[17vw]">
+    <div onClick={()=>setIsOpenMenu(false)} className=" p-10 relative bg-gradient-blue rounded-xl h-[92vh] w-[300px]  md:w-[17vw]">
       <h1 className="text-4xl font-bold font-montserrat text-white">
         Board.
       </h1>
