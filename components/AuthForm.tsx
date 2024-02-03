@@ -1,80 +1,152 @@
 "use client";
 
-import Button from "./Button";
-import Input from "./Input";
-import { useCallback, useState } from "react";
-import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const AuthForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
- 
-
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FieldValues>({
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-    },
+  const [canGo,setCanGo] = useState(false)
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
   });
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(true);
+
+  const handleSubmit = () => {
+    console.log(values);
+    if (values.email !== "" && values.password !== "") {
+      // do something
+      setIsLoading(true);
+      setCanGo(true)
+    } else {
+      alert("Fill all input");
+    }
   };
+
+  const handleChange = (e: { target: { name: any; value: any } }) => {
+    setValues((prevValues) => ({
+      ...prevValues,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   return (
     <div
-    // mt-8
+      // mt-8
       className="
-        sm:mx-auto
-        sm:w-full
-        sm:max-w-md
+        
     "
     >
       <div
-        // shadow
         className="
         bg-white
-        p-5 pt-10
+        pt-10
         rounded-xl
         sm:rounded-lg
-        sm:px-10
+        
       "
       >
-        <form className="space-y-3" 
-        onSubmit={handleSubmit(onSubmit)}
-        >
-          
-          <Input
-            label="Email Address"
-            id="email"
-            type="email"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-          />
-          <Input
-            label="Password"
-            id="password"
-            type="password"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-          />
+        <form className="space-y-3" onSubmit={handleSubmit}>
+          <div className="">
+            <label
+              htmlFor="email"
+              className="
+          block
+          text-sm font-lato
+          font-medium
+          leading-6
+        "
+            >
+              Email Address
+            </label>
+            <div className="mt-2">
+              <input
+                id="email"
+                type="email"
+                autoComplete="email"
+                disabled={isLoading}
+                placeholder=""
+                onChange={handleChange}
+                className={`
+              px-3
+              block
+              w-full bg-background
+              rounded-lg font-lato
+              border-0
+              focus:border-0 active:border-0
+              py-1.5 text-lg text-black
+              sm:text-sm
+              sm:leading-6
+              &{errors[id] && "focus:ring-rose-500"}
+              ${isLoading && "ocupacity-50 cursor-default"}`}
+              />
+            </div>
+          </div>
+
+          <div className="">
+            <label
+              htmlFor="password"
+              className="
+          block
+          text-sm font-lato
+          font-medium
+          leading-6
+        "
+            >
+              Password
+            </label>
+            <div className="mt-2">
+              <input
+                id="password"
+                type="password"
+                autoComplete="password"
+                disabled={isLoading}
+                placeholder=""
+                onChange={handleChange}
+                className={`
+              px-3
+              block
+              w-full bg-background
+              rounded-lg font-lato
+              border-0
+              focus:border-0 active:border-0
+              py-1.5 text-lg text-black
+              sm:text-sm
+              sm:leading-6
+              &{errors[id] && "focus:ring-rose-500"}
+              ${isLoading && "ocupacity-50 cursor-default"}`}
+              />
+            </div>
+          </div>
           <button className="font-lato text-[16px] text-[#346BD4]">
             Forgot Password?
           </button>
           <div className="">
-            <Button disabled={isLoading} fullWidth type="submit">
+            <button
+              type="submit"
+              disabled={isLoading && !canGo}
+              className={`
+            flex
+            justify-center
+            rounded-md
+            px-3
+            py-2
+            text-[16px]
+            font-bold font-montserrat
+            focus-visible:outline
+            focus-visible:outline-2
+            focus-visible:outline-offset-2
+            bg-[#605BFF]
+            text-white
+            hover:bg-sky-600 focus-visible:bg-sky-600  ${
+              isLoading && "opacity-50 cursor-default"
+            },
+            w-full`}
+            >
               Sign In
-            </Button>
+            </button>
           </div>
         </form>
-        
       </div>
     </div>
   );
