@@ -19,9 +19,7 @@ const Dropzone = ({ setData, data }: DropzoneProps) => {
 
   const { getRootProps, getInputProps, isDragActive, isFocused } = useDropzone({
     maxSize: 1024 * 1000,
-    accept: {
-      "csv": [".csv"]
-    },
+    
     onDrop: async (acceptedFiles: FileWithPath[]) => {
       try {
         setFiles(acceptedFiles[0]);
