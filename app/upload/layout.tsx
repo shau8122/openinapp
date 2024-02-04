@@ -9,7 +9,7 @@ export default async function UsersLayout({
       <div className="hidden md:block">
         <Sidebar/>
       </div>
-      <div className=" flex flex-col w-full py-4  md:py-8 px-2 md:px-10">
+      <div className=" flex flex-col w-full md:py-8 px-2 md:px-10">
 
       <Navbar/>
       {children}

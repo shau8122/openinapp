@@ -38,7 +38,7 @@ const Navbar = () => {
         </div>
       </div>
       {/* mobile navbar */}
-      <div className="flex md:hidden justify-between items-center mb-5">
+      <div className="flex md:hidden justify-between items-center py-4 mb-5">
         <div className="md:hidden flex items-center gap-5  ">
           <button onClick={() => setIsOpenMenu(true)}>
             <Image src={hamburger} width={35} height={35} alt="ham" />

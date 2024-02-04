@@ -1,10 +1,10 @@
 "use client";
 
-import closeIcon from '@/public/images/Icon/close.svg'
+import closeIcon from "@/public/images/Icon/close.svg";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import Dropzone from "@/components/Dropzone";
 
@@ -250,12 +250,12 @@ const InitialData = [
     selectedTags: ["Technology", "Travel", "Finance"],
   },
 ];
-type Data ={
-  id:number,
-  links:string,
-  prefix:string,
-  selectedTags:string[]
-}
+export type Data = {
+  id: number;
+  links: string;
+  prefix: string;
+  selectedTags: string[];
+};
 const tag = [
   "Technology",
   "Fashion",
@@ -269,43 +269,67 @@ const tag = [
   "Finance",
 ];
 const Upload = () => {
+  const [data, setData] = useState<Data[]>();
+  const [parseData, setParseData] = useState<any[]>();
 
-  const [data,setData]= useState<Data[]>(InitialData)
+  const refineData = useMemo(() => {
+    if (!parseData) return [];
 
- 
+    return parseData.map((item) => {
+     
+      const refinedItem: Data = {
+        id: item.id, 
+        links: item.links,
+        prefix: item.prefix,
+        selectedTags: item.selectedTags || [], 
+      };
 
+      return refinedItem;
+    });
+  }, [parseData]);
+  useEffect(() => {
+    setData(refineData);
+  }, [parseData, refineData]);
+
+  console.log(parseData, "parseData");
   const handleSelectChange = (value: string, id: number) => {
     setData((prevValue) =>
-  prevValue.map((item) =>
-    item.id === id
-      ? { ...item, selectedTags: [...item.selectedTags, value] }
-      : item
-  )
-);
+      prevValue?.map((item) =>
+        item.id === id
+          ? { ...item, selectedTags: [...item.selectedTags, value] }
+          : item
+      )
+    );
   };
-  const handleRemoveTag = (value:string,id:number)=>{
+  const handleRemoveTag = (value: string, id: number) => {
     setData((prevValue) =>
-    prevValue.map((item) =>
-      item.id === id
-        ? { ...item, selectedTags: item.selectedTags.filter(tag => tag !== value) }
-        : item
-    )
-  );
-  }
+      prevValue?.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              selectedTags: item.selectedTags.filter((tag) => tag !== value),
+            }
+          : item
+      )
+    );
+  };
   return (
     <>
-      
       <div className="text-black flex px-4 flex-col flex-1 overflow-y-auto ">
-      <h1 className="font-semibold block md:hidden font-figtree text-2xl leading-8 ">
-        Upload CSV{" "}
-      </h1>
+        <h1 className="font-semibold block md:hidden font-figtree text-2xl leading-8 ">
+          Upload CSV{" "}
+        </h1>
         <div>
           <div className="w-full h-[60vh] md:h-[70vh] flex items-center justify-center">
-            <Dropzone />
+            <Dropzone setData={setParseData} data={data} />
           </div>
         </div>
+        {
+          data?.length!==0 &&
         <div className="w-full mt-4 ">
-          <h1 className="font-semibold font-figtree text-2xl leading-8">Uploads</h1>
+          <h1 className="font-semibold font-figtree text-2xl leading-8">
+            Uploads
+          </h1>
           <div className="w-full p-4 overflow-x-auto">
             <table className="w-full font-figtree  min-w-[900px] flex justify-center items-center flex-col gap-5">
               <thead className="w-full flex justify-between items-center ">
@@ -318,7 +342,7 @@ const Upload = () => {
                 </tr>
               </thead>
               <tbody className="w-full flex justify-between items-center flex-col gap-5">
-                {data.map((row) => (
+                {data?.map((row) => (
                   <tr
                     key={row.id}
                     className="w-full flex justify-between items-center "
@@ -331,7 +355,6 @@ const Upload = () => {
                     </td>
                     <td className="text-start w-[10%]">{row.prefix}</td>
                     <td className="text-start w-[20%]">
-                      
                       <select
                         onChange={(e) =>
                           handleSelectChange(e.target.value, row.id)
@@ -342,7 +365,7 @@ const Upload = () => {
                         className="px-2 py-1 flex "
                       >
                         <option className="px-2 py-2" value="" disabled hidden>
-                          Select Tags 
+                          Select Tags
                         </option>
                         {tag
                           .filter((t) => !row.selectedTags.includes(t))
@@ -353,20 +376,34 @@ const Upload = () => {
                           ))}
                       </select>
                     </td>
-                    <td className="text-start w-[30%]">{
-                      row.selectedTags.map((tag)=>(
-                        <div className="inline-block m-1 bg-[#605BFF] text-white px-2 py-[2px] rounded-md" key={tag}>
+                    <td className="text-start w-[30%]">
+                      {row.selectedTags.map((tag) => (
+                        <div
+                          className="inline-block m-1 bg-[#605BFF] text-white px-2 py-[2px] rounded-md"
+                          key={tag}
+                        >
                           {tag}
-                          <button onClick={()=>handleRemoveTag(tag,row.id)} className="ml-1"><Image src={closeIcon} width={10} height={10} alt="close"/></button>
+                          <button
+                            onClick={() => handleRemoveTag(tag, row.id)}
+                            className="ml-1"
+                          >
+                            <Image
+                              src={closeIcon}
+                              width={10}
+                              height={10}
+                              alt="close"
+                            />
+                          </button>
                         </div>
-                      ))
-                    }</td>
+                      ))}
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         </div>
+        }
       </div>
     </>
   );

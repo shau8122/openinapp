@@ -62,14 +62,14 @@ const Home = () => {
         </div>
         <div className="">
           <div className="w-1/2 h-full  flex justify-center items-center absolute top-0 right-0 text-black">
-            <div className="w-full  sm:w-[400px] border-2 border-red-600  flex flex-col justify-center  p-10 ">
+            <div className="w-full  sm:w-[400px]  flex flex-col justify-center  p-10 ">
               <h1 className=" text-4xl font-bold font-montserrat mb-2">
                 Sign in
               </h1>
               <p className=" font-lato text-base font-normal leading-normal mb-5">
                 sign in to your account
               </p>
-              <div className="flex justify-between items-center w-full gap-2 mt-4 border-2 border-red-600">
+              <div className="flex justify-between items-center w-full gap-2 mt-4 ">
                 <div className="flex justify-center items-center px-3 py-2 gap-2 rounded-md ">
                   <Image src={googleIcon} alt="google Icon" />
                   <button
@@ -86,7 +86,7 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-              <div className="mt-4 w-full border-2 border-red-700 p-3">
+              <div className="mt-4 w-full  p-3">
                 <AuthForm />
                 <div className=" flex   gap-2 justify-center text-sm mt-4 px-2 text-gray-500">
                   <div className="text-secondary text-center font-lato ">
@@ -129,7 +129,7 @@ const Home = () => {
                 sign in to your account
               </p>
               <div className="flex justify-between items-center w-full gap-2 mt-4">
-                <div className="flex justify-center items-center bg-white py-1  gap-2 rounded-md ">
+                <div className="flex justify-center items-center bg-white px-3 py-2   gap-2 rounded-md ">
                   <Image src={googleIcon} alt="google Icon" />
                   <button
                     onClick={() => signIn("google")}
@@ -138,7 +138,7 @@ const Home = () => {
                     Sign in with Google
                   </button>
                 </div>
-                <div className="flex justify-center gap-2 py-1  bg-white items-center rounded-md ">
+                <div className="flex justify-center gap-2 px-3 py-2 bg-white items-center rounded-md ">
                   <Image src={appleIcon} alt="apple Icon" />
                   <p className="text-secondary text-center font-montserrat text-xs font-normal leading-normal">
                     Sign in with Apple

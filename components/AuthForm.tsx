@@ -6,20 +6,20 @@ import { useRouter } from "next/navigation";
 const AuthForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [canGo, setCanGo] = useState(false);
+  
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
     console.log(values);
+    router.push("/upload");
     if (values.email !== "" && values.password !== "") {
       // do something
       setIsLoading(true);
-      setCanGo(true);
-    } else {
-      alert("Fill all input");
+      
     }
   };
 
@@ -74,18 +74,7 @@ const AuthForm = () => {
               disabled={isLoading}
               placeholder=""
               onChange={handleChange}
-              className={`
-              px-3
-              block
-              w-full bg-background
-              rounded-lg font-lato
-              border-0
-              focus:border-0 active:border-0
-              py-1.5 text-lg text-black
-              sm:text-sm
-              sm:leading-6
-              &{errors[id] && "focus:ring-rose-500"}
-              ${isLoading && "ocupacity-50 cursor-default"}`}
+              className={` px-3 block w-full bg-background rounded-lg font-lato border-0 focus:border-0 active:border-0 py-1.5 text-lg text-black sm:text-sm sm:leading-6 &{errors[id] && "focus:ring-rose-500"} ${isLoading && "ocupacity-50 cursor-default"}`}
             />
           </div>
         </div>
@@ -95,7 +84,7 @@ const AuthForm = () => {
         <div className="">
           <button
             type="submit"
-            disabled={isLoading && !canGo}
+            disabled={isLoading }
             className={`
             flex
             justify-center
