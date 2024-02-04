@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 const AuthForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [canGo,setCanGo] = useState(false)
+  const [canGo, setCanGo] = useState(false);
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -17,7 +17,7 @@ const AuthForm = () => {
     if (values.email !== "" && values.password !== "") {
       // do something
       setIsLoading(true);
-      setCanGo(true)
+      setCanGo(true);
     } else {
       alert("Fill all input");
     }
@@ -31,79 +31,50 @@ const AuthForm = () => {
   };
 
   return (
-    <div
-      // mt-8
-      className="
-        
-    "
-    >
-      <div
-        className="
-        bg-white
-        pt-10
-        rounded-xl
-        sm:rounded-lg
-        
-      "
-      >
-        <form className="space-y-3" onSubmit={handleSubmit}>
-          <div className="">
-            <label
-              htmlFor="email"
-              className="
-          block
-          text-sm font-lato
-          font-medium
-          leading-6
-        "
-            >
-              Email Address
-            </label>
-            <div className="mt-2">
-              <input
-                id="email"
-                type="email"
-                autoComplete="email"
-                disabled={isLoading}
-                placeholder=""
-                onChange={handleChange}
-                className={`
-              px-3
-              block
-              w-full bg-background
-              rounded-lg font-lato
-              border-0
-              focus:border-0 active:border-0
-              py-1.5 text-lg text-black
-              sm:text-sm
-              sm:leading-6
-              &{errors[id] && "focus:ring-rose-500"}
+    <div className="pt-8 rounded-xl sm:rounded-lg">
+      <form className="space-y-3" onSubmit={handleSubmit}>
+        <div className="">
+          <label
+            htmlFor="email"
+            className=" block text-sm font-lato font-medium leading-6"
+          >
+            Email Address
+          </label>
+          <div className="mt-2">
+            <input
+              id="email"
+              type="email"
+              autoComplete="email"
+              disabled={isLoading}
+              placeholder=""
+              onChange={handleChange}
+              className={` px-3 block w-full bg-background rounded-lg font-lato border-0 focus:border-0 active:border-0 py-1.5 text-lg text-black sm:text-sm sm:leading-6 
               ${isLoading && "ocupacity-50 cursor-default"}`}
-              />
-            </div>
+            />
           </div>
+        </div>
 
-          <div className="">
-            <label
-              htmlFor="password"
-              className="
+        <div className="">
+          <label
+            htmlFor="password"
+            className="
           block
           text-sm font-lato
           font-medium
           leading-6
         "
-            >
-              Password
-            </label>
-            <div className="mt-2">
-              <input
-                id="password"
-                type="password"
-                autoComplete="password"
-                disabled={isLoading}
-                placeholder=""
-                onChange={handleChange}
-                className={`
+          >
+            Password
+          </label>
+          <div className="mt-2">
+            <input
+              id="password"
+              type="password"
+              autoComplete="password"
+              disabled={isLoading}
+              placeholder=""
+              onChange={handleChange}
+              className={`
               px-3
               block
               w-full bg-background
@@ -115,17 +86,17 @@ const AuthForm = () => {
               sm:leading-6
               &{errors[id] && "focus:ring-rose-500"}
               ${isLoading && "ocupacity-50 cursor-default"}`}
-              />
-            </div>
+            />
           </div>
-          <button className="font-lato text-[16px] text-[#346BD4]">
-            Forgot Password?
-          </button>
-          <div className="">
-            <button
-              type="submit"
-              disabled={isLoading && !canGo}
-              className={`
+        </div>
+        <button className="font-lato text-[16px] text-[#346BD4]">
+          Forgot Password?
+        </button>
+        <div className="">
+          <button
+            type="submit"
+            disabled={isLoading && !canGo}
+            className={`
             flex
             justify-center
             rounded-md
@@ -138,16 +109,15 @@ const AuthForm = () => {
             focus-visible:outline-offset-2
             bg-[#605BFF]
             text-white
-            hover:bg-sky-600 focus-visible:bg-sky-600  ${
+            hover:bg-blue-600 focus-visible:bg-blue-600  ${
               isLoading && "opacity-50 cursor-default"
             },
             w-full`}
-            >
-              Sign In
-            </button>
-          </div>
-        </form>
-      </div>
+          >
+            Sign In
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

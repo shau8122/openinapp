@@ -1,14 +1,11 @@
 "use client";
 
-import bellIcon from "@/public/images/Icon/bellIcon.svg";
-import profileImage from "@/public/images/profilImage.png";
 import closeIcon from '@/public/images/Icon/close.svg'
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { useSession } from "next-auth/react";
-import Sidebar from "@/components/Sidebar";
+import { useState } from "react";
+
 import Dropzone from "@/components/Dropzone";
 
 const InitialData = [
@@ -303,11 +300,11 @@ const Upload = () => {
         Upload CSV{" "}
       </h1>
         <div>
-          <div className="w-full h-[60vh] md:h-[80vh] flex items-center justify-center">
+          <div className="w-full h-[60vh] md:h-[70vh] flex items-center justify-center">
             <Dropzone />
           </div>
         </div>
-        <div className="w-full  ">
+        <div className="w-full mt-4 ">
           <h1 className="font-semibold font-figtree text-2xl leading-8">Uploads</h1>
           <div className="w-full p-4 overflow-x-auto">
             <table className="w-full font-figtree  min-w-[900px] flex justify-center items-center flex-col gap-5">
@@ -334,7 +331,7 @@ const Upload = () => {
                     </td>
                     <td className="text-start w-[10%]">{row.prefix}</td>
                     <td className="text-start w-[20%]">
-                      {/* <label htmlFor="SelectTag">Select Tags:</label> */}
+                      
                       <select
                         onChange={(e) =>
                           handleSelectChange(e.target.value, row.id)

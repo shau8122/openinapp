@@ -3,14 +3,7 @@ import uploadIcon from "@/public/images/Icon/upload.svg";
 import excelIcon from "@/public/images/Icon/excel.svg";
 
 import {
-  JSXElementConstructor,
-  Key,
-  PromiseLikeOfReactNode,
-  ReactElement,
-  ReactNode,
-  ReactPortal,
-  useCallback,
-  useEffect,
+  
   useState,
 } from "react";
 import { FileWithPath, useDropzone } from "react-dropzone";
@@ -48,7 +41,7 @@ const Dropzone = () => {
       <div
       {...getRootProps()}
 
-       className=" w-[350px] sm:w-[500px] rounded-[8px] h-[300px] border-2 border-dashed flex items-center justify-center">
+       className=" w-[300px] sm:w-[500px] rounded-[8px] h-[300px] border-2 border-dashed flex items-center justify-center">
         <input {...getInputProps()}  />
         <div className="flex flex-col items-center justify-center gap-4">
           
