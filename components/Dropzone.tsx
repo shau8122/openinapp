@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Papa from 'papaparse'
+import Papa from "papaparse";
 import uploadIcon from "@/public/images/Icon/upload.svg";
 import excelIcon from "@/public/images/Icon/excel.svg";
 
@@ -9,27 +9,36 @@ import { Data } from "@/app/upload/page";
 
 interface DropzoneProps {
   setData: (data: any[]) => void;
-  data?:Data[]
+  data?: Data[];
 }
 
-const Dropzone = ({ setData,data }: DropzoneProps) => {
+const Dropzone = ({ setData, data }: DropzoneProps) => {
   const [files, setFiles] = useState<FileWithPath>();
-  const [results,setResults] = useState<any[]>();
-  const [loading,setLoading] = useState(false)
+  const [results, setResults] = useState<any[]>();
+  const [loading, setLoading] = useState(false);
 
   const { getRootProps, getInputProps, isDragActive, isFocused } = useDropzone({
     maxSize: 1024 * 1000,
-    onDrop: (acceptedFiles: FileWithPath[]) => {
-      // Handle the dropped files here
-      setFiles(acceptedFiles[0]);
-      Papa.parse(acceptedFiles[0], {
-        header: true,
-        skipEmptyLines: true,
-        complete: function (results) {
-          console.log(results.data);
-          setResults(results.data);
-        },
-      });
+    accept: {
+      "csv": [".csv"]
+    },
+    onDrop: async (acceptedFiles: FileWithPath[]) => {
+      try {
+        setFiles(acceptedFiles[0]);
+        Papa.parse(acceptedFiles[0], {
+          header: true,
+          skipEmptyLines: true,
+          complete: function (results) {
+            console.log(results.data);
+            setResults(results.data);
+          },
+        });
+      } catch (error) {
+        console.error("Error processing file:", error);
+        alert(
+          "Error processing file. Please check the file format and try again."
+        );
+      }
     },
   });
 
@@ -38,15 +47,15 @@ const Dropzone = ({ setData,data }: DropzoneProps) => {
     e.preventDefault();
 
     if (!results) return;
-    setData(results)
+    setData(results);
     setTimeout(() => {
-      setLoading(false)
+      setLoading(false);
     }, 1000);
   };
   const handleRemove = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    setFiles(undefined)
-    setData([])
+    setFiles(undefined);
+    setData([]);
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -94,17 +103,20 @@ const Dropzone = ({ setData,data }: DropzoneProps) => {
             focus-visible:outline-2
             focus-visible:outline-offset-2
             bg-[#605BFF]
-            ${data?.length!==0 && "bg-[#605BFF]/75 cursor-not-allowed"}
+            ${data?.length !== 0 && "bg-[#605BFF]/75 cursor-not-allowed"}
             text-white
             hover:bg-[#605BFF]/75 focus-visible:bg-[#605BFF]/75 
             w-full`}
-            disabled={data?.length!==0}
+        disabled={data?.length !== 0}
       >
-        {loading ? <>loading...</>:<>
-        <Image src={uploadIcon} height={12} width={12} alt="" />
-        Upload
-        </>
-        }
+        {loading ? (
+          <>loading...</>
+        ) : (
+          <>
+            <Image src={uploadIcon} height={12} width={12} alt="" />
+            Upload
+          </>
+        )}
       </button>
     </form>
   );

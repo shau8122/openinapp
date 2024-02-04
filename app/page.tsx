@@ -37,7 +37,7 @@ const Home = () => {
           <div className="text-white absolute left-1/4 transform -translate-x-[75%] -translate-y-[50%] top-1/2 font-montserrat text-7xl font-bold leading-normal">
             Base
           </div>
-          <div className=" absolute bottom-20 left-[5%] lg:left-[10%] w-[25%] flex items-center justify-between">
+          <div className=" absolute bottom-20 left-[5%] lg:left-[10%] w-[20%] flex items-center justify-between">
             <Image
               className="cursor-pointer "
               src={githubLogo1}
@@ -129,7 +129,7 @@ const Home = () => {
                 sign in to your account
               </p>
               <div className="flex justify-between items-center w-full gap-2 mt-4">
-                <div className="flex justify-center items-center bg-white px-3 py-2   gap-2 rounded-md ">
+                <div className="flex justify-center items-center bg-white px-2 py-2   gap-2 rounded-md ">
                   <Image src={googleIcon} alt="google Icon" />
                   <button
                     onClick={() => signIn("google")}
@@ -138,7 +138,7 @@ const Home = () => {
                     Sign in with Google
                   </button>
                 </div>
-                <div className="flex justify-center gap-2 px-3 py-2 bg-white items-center rounded-md ">
+                <div className="flex justify-center gap-2 px-2 py-2 bg-white items-center rounded-md ">
                   <Image src={appleIcon} alt="apple Icon" />
                   <p className="text-secondary text-center font-montserrat text-xs font-normal leading-normal">
                     Sign in with Apple
